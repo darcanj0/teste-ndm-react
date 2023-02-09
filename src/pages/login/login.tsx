@@ -1,3 +1,6 @@
+import { Box, Typography } from "@mui/material";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
 import { useState } from "react";
 import api from "../../api";
 
@@ -18,8 +21,14 @@ export const Login = () => {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-    </div>
+    <Box
+      color={"GrayText"}
+      border="1px solid black"
+      borderRadius={"10px"}
+      height={"calc(100vh - 20px)"}
+      margin={"10px"}
+      textAlign="center"
+    >
+    </Box>
   );
 };

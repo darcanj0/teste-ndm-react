@@ -4,7 +4,7 @@ export const BackgroundBox = ({ children }: BoxProps) => {
   return (
     <Box
       sx={{
-        background: "#931fa3",
+        background: "#dddfee",
       }}
       minHeight="100vh"
       width="100vw"
