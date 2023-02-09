@@ -6,11 +6,14 @@ import { PlayersSection } from "../../components/players";
 import { TeamsSection } from "../../components/teams";
 
 export const Main = () => {
-  const [currentSection, setCurrentSection] = useState(0);
+  const sections = ["PLAYERS", "TEAMS"];
 
-  const handleSectionChange = () => {
-    if (currentSection === 0) setCurrentSection(1);
-    else setCurrentSection(0);
+  const [currentSection, setCurrentSection] = useState(sections[0]);
+
+  const handleSectionChange = (newValue: string) => {
+    console.log(newValue);
+    if (newValue === "PLAYERS") setCurrentSection("PLAYERS");
+    if (newValue === "TEAMS") setCurrentSection("TEAMS");
   };
 
   return (
@@ -33,8 +36,9 @@ export const Main = () => {
         <Nav
           handleSectionChange={handleSectionChange}
           currentSection={currentSection}
+          sections={sections}
         />
-        {currentSection === 0 ? (
+        {currentSection === "PLAYERS" ? (
           <PlayersSection></PlayersSection>
         ) : (
           <TeamsSection></TeamsSection>

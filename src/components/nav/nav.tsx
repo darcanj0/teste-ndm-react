@@ -3,19 +3,22 @@ import Person from "@mui/icons-material/Person";
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 
 export interface NavProps {
-  handleSectionChange: () => void;
-  currentSection: number;
+  handleSectionChange: (newValue: string) => void;
+  currentSection: string;
+  sections: string[];
 }
 
-export const Nav = ({ currentSection, handleSectionChange }: NavProps) => {
-  const sections = ["PLAYERS", "TEAMS"];
-
+export const Nav = ({
+  currentSection,
+  handleSectionChange,
+  sections,
+}: NavProps) => {
   return (
     <BottomNavigation
       showLabels
-      value={sections[currentSection]}
+      value={currentSection}
       onChange={(event, newValue) => {
-        handleSectionChange();
+        handleSectionChange(sections[newValue]);
       }}
       sx={{
         width: "fit-content",
