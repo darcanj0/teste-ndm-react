@@ -1,46 +1,36 @@
-import { Box, Tab, Tabs, Typography } from "@mui/material";
+import { Box } from "@mui/material";
+import { useState } from "react";
 import { BackgroundBox } from "../../components/background-box/background-box";
+import { Nav } from "../../components/nav/nav";
 
 export const Main = () => {
-  const sections = ["Players", "Teams"];
+  const [currentSection, setCurrentSection] = useState(0);
+
+  const handleSectionChange = () => {
+    if (currentSection === 0) setCurrentSection(1);
+    else setCurrentSection(0);
+  };
 
   return (
     <BackgroundBox>
       <Box
         sx={{
           background: "#dddfee",
-          boxShadow:
-            "inset -20px 20px 60px #bcbeca, inset 20px -20px 60px #feffff",
+          boxShadow: "20px -20px 60px #bcbeca, -20px 20px 60px #feffff",
         }}
         borderRadius={"10px"}
         margin="30px"
         width={"100%"}
-        padding="5px"
+        padding="10px"
         height={"calc(100vh - 60px)"}
+        display="flex"
+        flexDirection={"column"}
+        alignItems="center"
       >
-        <Tabs
-          sx={{ borderBottom: 1, borderColor: "divider", color: "white" }}
-          textColor="primary"
-          indicatorColor="primary"
-          value={sections[0]}
-          onChange={() => console.log("changed")}
-          aria-label=""
-          variant="fullWidth"
-        >
-          <Tab
-            label={sections[0]}
-            {...(<Typography variant="h3">{sections[0]}</Typography>)}
-          />
-          <Tab
-            label={sections[1]}
-            color="white"
-            {...(
-              <div>
-                <h1>lalalal</h1>
-              </div>
-            )}
-          />
-        </Tabs>
+        <Nav
+          handleSectionChange={handleSectionChange}
+          currentSection={currentSection}
+        />
       </Box>
     </BackgroundBox>
   );
