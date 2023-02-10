@@ -1,6 +1,6 @@
-import { Box } from "@mui/material";
 import { useState } from "react";
 import { BackgroundBox } from "../../components/background-box/background-box";
+import { ContentBox } from "../../components/content-box/content-box";
 import { Nav } from "../../components/nav/nav";
 import { PlayersSection } from "../../components/players";
 import { TeamsSection } from "../../components/teams";
@@ -16,21 +16,7 @@ export const Main = () => {
 
   return (
     <BackgroundBox>
-      <Box
-        sx={{
-          background: "#dddfee",
-          boxShadow: "20px -20px 60px #bcbeca, -20px 20px 60px #feffff",
-        }}
-        borderRadius={"10px"}
-        margin="30px"
-        width={"100%"}
-        padding="10px 10px 10px 10px"
-        height={"calc(100vh - 60px)"}
-        display="flex"
-        flexDirection={"column"}
-        alignItems="center"
-        gap={"50px"}
-      >
+      <ContentBox>
         <Nav
           handleSectionChange={handleSectionChange}
           currentSection={currentSection}
@@ -41,7 +27,7 @@ export const Main = () => {
         ) : (
           <TeamsSection></TeamsSection>
         )}
-      </Box>
+      </ContentBox>
     </BackgroundBox>
   );
 };

@@ -3,6 +3,8 @@ import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import { useState } from "react";
 import api from "../../api";
+import { BackgroundBox } from "../../components/background-box/background-box";
+import { ContentBox } from "../../components/content-box/content-box";
 
 interface LoginParams {
   email: string;
@@ -21,14 +23,10 @@ export const Login = () => {
   };
 
   return (
-    <Box
-      color={"GrayText"}
-      border="1px solid black"
-      borderRadius={"10px"}
-      height={"calc(100vh - 20px)"}
-      margin={"10px"}
-      textAlign="center"
-    >
-    </Box>
+    <BackgroundBox>
+      <ContentBox>
+        
+      </ContentBox>
+    </BackgroundBox>
   );
 };
