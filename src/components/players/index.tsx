@@ -20,7 +20,7 @@ const createPlayerSchema = yup.object().shape({
     .min(18, "Age must be between 18 and 100"),
 });
 
-interface IPlayerCreationData {
+interface IPlayerCreationParams {
   name: string;
   age: number;
 }
@@ -32,11 +32,11 @@ export const PlayersSection = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IPlayerCreationData>({
+  } = useForm<IPlayerCreationParams>({
     resolver: yupResolver(createPlayerSchema),
   });
 
-  const submitForm = async (data: IPlayerCreationData) => {
+  const submitForm = async (data: IPlayerCreationParams) => {
     console.log(headers);
     try {
       const response = await api.post("player", data, headers);
