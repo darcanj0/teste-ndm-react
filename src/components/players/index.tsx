@@ -1,7 +1,11 @@
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
+import api from "../../api";
+import headers from "../../api/header";
+import { useState } from "react";
+import { ErrorAlert } from "../alerts/error-alert";
 
 const createPlayerSchema = yup.object().shape({
   name: yup
@@ -22,6 +26,8 @@ interface IPlayerCreationData {
 }
 
 export const PlayersSection = () => {
+  const [showErrorAlert, setShowErrorAltert] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -30,8 +36,15 @@ export const PlayersSection = () => {
     resolver: yupResolver(createPlayerSchema),
   });
 
-  const submitForm = (data: IPlayerCreationData) => {
-    console.log(data);
+  const submitForm = async (data: IPlayerCreationData) => {
+    console.log(headers);
+    try {
+      const response = await api.post("player", data, headers);
+      if (response.status === 201) console.log("success");
+    } catch (error) {
+      console.error(error);
+      setShowErrorAltert(true);
+    }
   };
 
   return (
@@ -54,6 +67,15 @@ export const PlayersSection = () => {
         alignItems: "center",
       }}
     >
+      {showErrorAlert && (
+        <ErrorAlert
+          message="Something went wrong..."
+          setShowErrorAltert={setShowErrorAltert}
+        />
+      )}
+      <Typography variant="h5" color={"primary"}>
+        Register a player
+      </Typography>
       <TextField
         {...register("name")}
         id="outlined-basic"
