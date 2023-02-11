@@ -1,17 +1,19 @@
 import { Box, Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import { Team } from "../teams/team.interface";
+import { Player, Team } from "../teams/team.interface";
 import { ModalOverlay } from "./modal-overlay";
 import { PlayersList } from "./players-list";
 
 export interface EditTeamModalProps {
   setShowEditTeamModal: React.Dispatch<React.SetStateAction<boolean>>;
   team: Team;
+  freePlayers: Player[];
 }
 
 export const EditTeamModal = ({
   setShowEditTeamModal,
   team,
+  freePlayers,
 }: EditTeamModalProps) => {
   return (
     <ModalOverlay>
@@ -46,6 +48,11 @@ export const EditTeamModal = ({
             title="Current Players"
             players={team.players}
             editables={false}
+          />
+          <PlayersList
+            title="Avaliable Players"
+            players={freePlayers}
+            editables={true}
           />
         </Box>
         <Button
