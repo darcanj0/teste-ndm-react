@@ -2,6 +2,7 @@ import { Box, Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { Team } from "../teams/team.interface";
 import { ModalOverlay } from "./modal-overlay";
+import { PlayersList } from "./players-list";
 
 export interface EditTeamModalProps {
   setShowEditTeamModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -30,7 +31,23 @@ export const EditTeamModal = ({
           alignItems: "center",
         }}
       >
-        <Typography>{team.name}</Typography>
+        <Typography variant="h4" color={"primary"}>
+          {team.name}
+        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            width: "100%",
+            height: "75%",
+            justifyContent: "space-around",
+          }}
+        >
+          <PlayersList
+            title="Current Players"
+            players={team.players}
+            editables={false}
+          />
+        </Box>
         <Button
           variant="contained"
           color="error"
