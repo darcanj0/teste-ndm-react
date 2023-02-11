@@ -14,7 +14,6 @@ export const PlayersList = ({ players, title, editables }: PlayersList) => {
     <Box
       textAlign={"center"}
       sx={{
-        border: "1px solid black",
         width: "300px",
         height: "100%",
         display: "flex",

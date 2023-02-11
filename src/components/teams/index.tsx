@@ -5,10 +5,24 @@ import headers from "../../api/header";
 import { EditTeamModal } from "../edit-team-modal";
 import { TeamCard } from "../team-card";
 import { TeamRegister } from "./team-register";
-import { Team } from "./team.interface";
+import { Player, Team } from "./team.interface";
 
 export const TeamsSection = () => {
   const [teams, setTeams] = useState<Team[]>();
+
+  const refetchTeams = async () => {
+    api.get("team", headers).then((res) => {
+      setTeams(res.data);
+    });
+  };
+
+  const [freePlayers, setFreePlayers] = useState<Player[]>();
+
+  const refetchFreePlayers = async () => {
+    api.get("player", headers).then((res) => {
+      setFreePlayers(res.data);
+    });
+  };
 
   const [showEditTeamModal, setShowEditTeamModal] = useState(false);
   const [selectedTeam, setSelectedTeam] = useState<Team>();
@@ -22,16 +36,12 @@ export const TeamsSection = () => {
   useEffect(() => {
     api.get("team", headers).then((res) => {
       setTeams(res.data);
-      console.log(teams);
+    });
+
+    api.get("player", headers).then((res) => {
+      setFreePlayers(res.data);
     });
   }, []);
-
-  const refetchTeams = async () => {
-    api.get("team", headers).then((res) => {
-      setTeams(res.data);
-      console.log(teams);
-    });
-  };
 
   return (
     <Box
@@ -47,6 +57,7 @@ export const TeamsSection = () => {
         <EditTeamModal
           team={selectedTeam as Team}
           setShowEditTeamModal={setShowEditTeamModal}
+          freePlayers={freePlayers as Player[]}
         />
       )}
       <TeamRegister refetchTeams={refetchTeams} />

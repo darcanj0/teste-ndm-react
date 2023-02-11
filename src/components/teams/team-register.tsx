@@ -37,7 +37,6 @@ export const TeamRegister = ({ refetchTeams }: TeamRegisterProps) => {
   const [showTeamCreationAlert, setShowTeamCreationAlert] = useState(false);
 
   const submitForm = async (data: ITeamCreationParams) => {
-    console.log(headers);
     try {
       const response = await api.post("team", data, headers);
       if (response.status === 201) console.log("success");
