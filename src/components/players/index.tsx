@@ -37,7 +37,6 @@ export const PlayersSection = () => {
   });
 
   const submitForm = async (data: IPlayerCreationParams) => {
-    console.log(headers);
     try {
       const response = await api.post("player", data, headers);
       if (response.status === 201) console.log("success");

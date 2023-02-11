@@ -6,6 +6,8 @@ import headers from "../../api/header";
 import { ErrorAlert } from "../alerts/error-alert";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, TextField, Typography, Box } from "@mui/material";
+import { BoxProps } from "@mui/material/Box";
+import { Team } from "./team.interface";
 
 const createTeamSchema = yup.object().shape({
   name: yup
@@ -19,7 +21,11 @@ interface ITeamCreationParams {
   name: string;
 }
 
-export const TeamRegister = () => {
+export interface TeamRegisterProps extends BoxProps {
+  refetchTeams: () => Promise<void>;
+}
+
+export const TeamRegister = ({ refetchTeams }: TeamRegisterProps) => {
   const {
     register,
     handleSubmit,
@@ -35,6 +41,7 @@ export const TeamRegister = () => {
     try {
       const response = await api.post("team", data, headers);
       if (response.status === 201) console.log("success");
+      await refetchTeams();
     } catch (error) {
       console.error(error);
       setShowTeamCreationAlert(true);
