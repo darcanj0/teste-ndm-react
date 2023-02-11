@@ -68,6 +68,11 @@ export const EditTeamModal = ({
             refetchFreePlayers={refetchFreePlayers}
             refetchTeams={refetchTeams}
           />
+          <PlayersList
+            title="Avaliable Players"
+            players={freePlayers}
+            editables={true}
+          />
         </Box>
         <Button
           variant="contained"
