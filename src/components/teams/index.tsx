@@ -1,7 +1,8 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import api from "../../api";
 import headers from "../../api/header";
+import { TeamCard } from "../team-card";
 import { TeamRegister } from "./team-register";
 import { Team } from "./team.interface";
 
@@ -25,7 +26,6 @@ export const TeamsSection = () => {
   return (
     <Box
       display={"flex"}
-      border="1px solid blue"
       justifyContent={"space-around"}
       alignItems="center"
       sx={{
@@ -34,14 +34,27 @@ export const TeamsSection = () => {
       }}
     >
       <TeamRegister refetchTeams={refetchTeams} />
-      {teams?.map((team) => {
-        return (
-          <Box
-            id={team.id}
-            sx={{ width: "90px", height: "100px", background: "black" }}
-          ></Box>
-        );
-      })}
+      <Box
+        sx={{
+          borderRadius: "10px",
+          width: "45rem",
+          height: "40rem",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          overflowY: "auto",
+          padding: "10px",
+          gap: "15px",
+          boxShadow: "20px -20px 60px #bcbeca, -20px 20px 60px #feffff",
+        }}
+      >
+        <Typography variant="h5" color={"primary"}>
+          Edit Team
+        </Typography>
+        {teams?.map((team) => {
+          return <TeamCard team={team} />;
+        })}
+      </Box>
     </Box>
   );
 };
