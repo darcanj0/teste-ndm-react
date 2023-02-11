@@ -24,13 +24,7 @@ export const PlayerCard = ({
     const body = { playerId: player.id };
 
     const response = await api.post(`team/${teamId}`, body, headers);
-    if (response.status === 422) {
-      alert("A team can only have up to 5 players");
-    }
-
-    if (response.status === 404) {
-      alert("Team or player not found");
-    }
+    console.log(response.status);
 
     refetchTeams();
     refetchFreePlayers();

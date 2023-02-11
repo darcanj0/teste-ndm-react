@@ -18,7 +18,7 @@ export const Main = () => {
 
   const sections = ["PLAYERS", "TEAMS"];
 
-  const [currentSection, setCurrentSection] = useState(sections[1]);
+  const [currentSection, setCurrentSection] = useState(sections[0]);
 
   const handleSectionChange = (newValue: string) => {
     setCurrentSection(newValue);
