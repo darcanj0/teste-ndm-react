@@ -55,9 +55,12 @@ export const TeamsSection = () => {
     >
       {showEditTeamModal && (
         <EditTeamModal
+          teams={teams as Team[]}
           team={selectedTeam as Team}
           setShowEditTeamModal={setShowEditTeamModal}
           freePlayers={freePlayers as Player[]}
+          refetchFreePlayers={refetchFreePlayers}
+          refetchTeams={refetchTeams}
         />
       )}
       <TeamRegister refetchTeams={refetchTeams} />

@@ -1,15 +1,26 @@
 import { Box, BoxProps } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { PlayerCard } from "../player-card";
-import { Player } from "../teams/team.interface";
+import { Player, Team } from "../teams/team.interface";
 
 export interface PlayersList extends BoxProps {
   players: Player[];
+  teams: Team[];
   editables: boolean;
   title: string;
+  teamId: string;
+  refetchTeams: () => Promise<void>;
+  refetchFreePlayers: () => Promise<void>;
 }
 
-export const PlayersList = ({ players, title, editables }: PlayersList) => {
+export const PlayersList = ({
+  players,
+  title,
+  editables,
+  teamId,
+  refetchFreePlayers,
+  refetchTeams,
+}: PlayersList) => {
   return (
     <Box
       textAlign={"center"}
@@ -27,7 +38,16 @@ export const PlayersList = ({ players, title, editables }: PlayersList) => {
         {title}
       </Typography>
       {players.map((player) => {
-        return <PlayerCard player={player} editable={editables} />;
+        return (
+          <PlayerCard
+            id={player.id}
+            player={player}
+            editable={editables}
+            teamId={teamId}
+            refetchFreePlayers={refetchFreePlayers}
+            refetchTeams={refetchTeams}
+          />
+        );
       })}
     </Box>
   );

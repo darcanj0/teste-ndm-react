@@ -1,13 +1,41 @@
 import { Box, IconButton, Typography } from "@mui/material";
 import { Player } from "../teams/team.interface";
 import AddIcon from "@mui/icons-material/Add";
+import api from "../../api";
+import headers from "../../api/header";
 
 export interface PlayerCardProps {
+  id: string;
   player: Player;
+  teamId: string;
   editable: boolean;
+  refetchTeams: () => Promise<void>;
+  refetchFreePlayers: () => Promise<void>;
 }
 
-export const PlayerCard = ({ player, editable }: PlayerCardProps) => {
+export const PlayerCard = ({
+  player,
+  editable,
+  teamId,
+  refetchFreePlayers,
+  refetchTeams,
+}: PlayerCardProps) => {
+  const addPlayerToTeam = async () => {
+    const body = { playerId: player.id };
+
+    const response = await api.post(`team/${teamId}`, body, headers);
+    if (response.status === 422) {
+      alert("A team can only have up to 5 players");
+    }
+
+    if (response.status === 404) {
+      alert("Team or player not found");
+    }
+
+    refetchTeams();
+    refetchFreePlayers();
+  };
+
   return (
     <Box
       sx={{
@@ -32,6 +60,7 @@ export const PlayerCard = ({ player, editable }: PlayerCardProps) => {
       {editable && (
         <IconButton
           aria-label="add"
+          onClick={() => addPlayerToTeam()}
           sx={{
             color: "white",
           }}

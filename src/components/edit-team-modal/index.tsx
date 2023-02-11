@@ -7,13 +7,19 @@ import { PlayersList } from "./players-list";
 export interface EditTeamModalProps {
   setShowEditTeamModal: React.Dispatch<React.SetStateAction<boolean>>;
   team: Team;
+  teams: Team[];
   freePlayers: Player[];
+  refetchTeams: () => Promise<void>;
+  refetchFreePlayers: () => Promise<void>;
 }
 
 export const EditTeamModal = ({
   setShowEditTeamModal,
   team,
   freePlayers,
+  refetchFreePlayers,
+  refetchTeams,
+  teams,
 }: EditTeamModalProps) => {
   return (
     <ModalOverlay>
@@ -46,13 +52,21 @@ export const EditTeamModal = ({
         >
           <PlayersList
             title="Current Players"
-            players={team.players}
+            players={teams.find((t) => t.id === team.id)?.players as Player[]}
             editables={false}
+            teamId={team.id}
+            refetchFreePlayers={refetchFreePlayers}
+            refetchTeams={refetchTeams}
+            teams={teams}
           />
           <PlayersList
             title="Avaliable Players"
+            teams={teams}
             players={freePlayers}
             editables={true}
+            teamId={team.id}
+            refetchFreePlayers={refetchFreePlayers}
+            refetchTeams={refetchTeams}
           />
         </Box>
         <Button
