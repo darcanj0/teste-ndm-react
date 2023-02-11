@@ -4,10 +4,10 @@ import EditIcon from "@mui/icons-material/Edit";
 
 export interface TeamCardProps extends BoxProps {
   team: Team;
-  //   openTeamModal: (id: string) => void;
+  openEditTeamModal: (id: string) => void;
 }
 
-export const TeamCard = ({ team }: TeamCardProps) => {
+export const TeamCard = ({ team, openEditTeamModal }: TeamCardProps) => {
   return (
     <Box
       sx={{
@@ -30,6 +30,7 @@ export const TeamCard = ({ team }: TeamCardProps) => {
       </Typography>
 
       <IconButton
+        onClick={() => openEditTeamModal(team.id)}
         aria-label="edit"
         sx={{
           color: "white",

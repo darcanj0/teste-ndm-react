@@ -2,12 +2,22 @@ import { Box, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import api from "../../api";
 import headers from "../../api/header";
+import { EditTeamModal } from "../edit-team-modal";
 import { TeamCard } from "../team-card";
 import { TeamRegister } from "./team-register";
 import { Team } from "./team.interface";
 
 export const TeamsSection = () => {
   const [teams, setTeams] = useState<Team[]>();
+
+  const [showEditTeamModal, setShowEditTeamModal] = useState(false);
+  const [selectedTeam, setSelectedTeam] = useState<Team>();
+
+  const openEditTeamModal = (id: string): void => {
+    const team = teams?.find((team) => team.id === id);
+    setSelectedTeam(team);
+    setShowEditTeamModal(true);
+  };
 
   useEffect(() => {
     api.get("team", headers).then((res) => {
@@ -33,6 +43,12 @@ export const TeamsSection = () => {
         height: "100%",
       }}
     >
+      {showEditTeamModal && (
+        <EditTeamModal
+          team={selectedTeam as Team}
+          setShowEditTeamModal={setShowEditTeamModal}
+        />
+      )}
       <TeamRegister refetchTeams={refetchTeams} />
       <Box
         sx={{
@@ -52,7 +68,7 @@ export const TeamsSection = () => {
           Edit Team
         </Typography>
         {teams?.map((team) => {
-          return <TeamCard team={team} />;
+          return <TeamCard team={team} openEditTeamModal={openEditTeamModal} />;
         })}
       </Box>
     </Box>
