@@ -20,7 +20,7 @@ Com as variáveis de ambiente configuradas, rode o comando seed para o Banco de 
 Feito isso, inicie a aplicação:
 
 ```bash
-  yarn start
+  yarn dev
 ```
 
 ## Apêndice
