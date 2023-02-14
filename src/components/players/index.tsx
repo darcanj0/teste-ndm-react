@@ -3,7 +3,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import api from "../../api";
-import headers from "../../api/header";
 import { useState } from "react";
 import { ErrorAlert } from "../alerts/error-alert";
 
@@ -38,7 +37,7 @@ export const PlayersSection = () => {
 
   const submitForm = async (data: IPlayerCreationParams) => {
     try {
-      const response = await api.post("player", data, headers);
+      const response = await api.post("player", data);
       if (response.status === 201) console.log("success");
     } catch (error) {
       console.error(error);

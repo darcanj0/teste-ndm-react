@@ -1,7 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import api from "../../api";
-import headers from "../../api/header";
 import { EditTeamModal } from "../edit-team-modal";
 import { TeamCard } from "../team-card";
 import { TeamRegister } from "./team-register";
@@ -11,7 +10,7 @@ export const TeamsSection = () => {
   const [teams, setTeams] = useState<Team[]>();
 
   const refetchTeams = async () => {
-    api.get("team", headers).then((res) => {
+    api.get("team").then((res) => {
       setTeams(res.data);
     });
   };
@@ -19,7 +18,7 @@ export const TeamsSection = () => {
   const [freePlayers, setFreePlayers] = useState<Player[]>();
 
   const refetchFreePlayers = async () => {
-    api.get("player", headers).then((res) => {
+    api.get("player").then((res) => {
       setFreePlayers(res.data);
     });
   };
@@ -34,11 +33,11 @@ export const TeamsSection = () => {
   };
 
   useEffect(() => {
-    api.get("team", headers).then((res) => {
+    api.get("team").then((res) => {
       setTeams(res.data);
     });
 
-    api.get("player", headers).then((res) => {
+    api.get("player").then((res) => {
       setFreePlayers(res.data);
     });
   }, []);

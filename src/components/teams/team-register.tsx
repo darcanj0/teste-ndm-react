@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import api from "../../api";
-import headers from "../../api/header";
 import { ErrorAlert } from "../alerts/error-alert";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, TextField, Typography, Box } from "@mui/material";
@@ -38,7 +37,7 @@ export const TeamRegister = ({ refetchTeams }: TeamRegisterProps) => {
 
   const submitForm = async (data: ITeamCreationParams) => {
     try {
-      const response = await api.post("team", data, headers);
+      const response = await api.post("team", data);
       if (response.status === 201) console.log("success");
       await refetchTeams();
     } catch (error) {

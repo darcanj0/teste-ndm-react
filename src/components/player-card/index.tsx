@@ -2,7 +2,6 @@ import { Box, IconButton, Typography } from "@mui/material";
 import { Player } from "../teams/team.interface";
 import AddIcon from "@mui/icons-material/Add";
 import api from "../../api";
-import headers from "../../api/header";
 
 export interface PlayerCardProps {
   id: string;
@@ -23,7 +22,7 @@ export const PlayerCard = ({
   const addPlayerToTeam = async () => {
     const body = { playerId: player.id };
 
-    const response = await api.post(`team/${teamId}`, body, headers);
+    const response = await api.post(`team/${teamId}`, body);
     console.log(response.status);
 
     refetchTeams();
